@@ -17,10 +17,9 @@ def is_below_energy_limit(cap, num):
         # print(f'{num} is not below the energy limit')
         pass
 
-
 def generate_kets(cap):
     hilbert_space = []
-    for i in tqdm(range(cap)):
+    for i in tqdm(range(1, cap)):
         if is_below_energy_limit(cap, i):
             hilbert_space.append(i)
     return np.array(hilbert_space)
@@ -30,9 +29,9 @@ def partition_hilbert_space(arr):
     notPrimes = []
     for i in range(1, len(arr)):
         if isprime(arr[i]):
-            primes.append(arr[i])
+            primes.append(float(arr[i]))
         else:
-            notPrimes.append(arr[i])
+            notPrimes.append(float(arr[i]))
     return np.array(primes), np.array(notPrimes)
 
 # Define truncated prime zeta function (sum over primes)
@@ -62,7 +61,7 @@ def main():
     cap = int(input("Set an energy cap: "))
 
     #Scale the time oscillations (keep it 1 to be faithful)
-    scale = 1
+    scale = int(input("Set scale: "))
 
     # Define the number of points plotted (i.e. resolution)
     num_plot_plots = int(input("Set resolution scale: "))
@@ -71,15 +70,15 @@ def main():
     epsilon = 0.05
     beta_of_interest = 0.5
     # fixed_betas = [beta_of_interest - 2*epsilon, beta_of_interest - epsilon, beta_of_interest, beta_of_interest + epsilon, beta_of_interest + 2*epsilon]
-    fixed_betas = [beta_of_interest - epsilon, beta_of_interest, beta_of_interest + epsilon]
-    beta_values_to_plot = [i for i in fixed_betas]
+    # fixed_betas = [beta_of_interest - epsilon, beta_of_interest, beta_of_interest + epsilon]
+    # beta_values_to_plot = [i for i in fixed_betas]
 
     # If you want to manually enter betas
-    # beta_values_to_plot = [0.01, 0.5, 1.1]
+    beta_values_to_plot = [0.01, 1, 2.75]
 
     # Define domains for 3D plot
     beta_min = 0
-    beta_max = 1.2
+    beta_max = 3
     time_min = 0
     time_max = float(input("Set time_max: "))
 
